@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: flask-test-project
+  name: flask-test-project
+spec:
+  ports:
+  - protocol: TCP
+    port: 5000
+    name: flask-test-project
+  type: ClusterIP
+  selector:
+    service: flask-test-project

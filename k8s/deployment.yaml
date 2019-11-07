@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-test-project
+  labels:
+    service: flask-test-project
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: flask-test-project
+  template:
+    metadata:
+      labels:
+        service: flask-test-project
+
+    spec:
+      containers: 
+      - name: flask-test-project
+        image: ankitnayan/flask-test-project:v0.4
+        imagePullPolicy: Always
+        env:
+          - name: NODE_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+      restartPolicy: Always
